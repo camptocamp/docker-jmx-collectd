@@ -168,12 +168,12 @@ LoadPlugin java
       </Value>
     </MBean>
 
-{{ $containers := getvs "/containers/containers/*/name" -}}
+{{ $containers := getvs "/containers/*/name" -}}
 {{ range $containers -}}
 {{   $contname := . -}}
-{{   $jmxPath := printf "/containers/containers/%s/labels/com.camptocamp.georchestra_jmx" $contname -}}
+{{   $jmxPath := printf "/containers/%s/labels/com.camptocamp.georchestra_jmx" $contname -}}
 {{   $isJmx := getv $jmxPath "false" -}}
-{{   if eq $isJmx "true" -}}
+{{   if eq $isJmx "true" }}
      <Connection>
              ServiceURL "service:jmx:rmi:///jndi/rmi://{{ $contname  }}:1099/jmxrmi"
              Host "{{ $contname }}"
