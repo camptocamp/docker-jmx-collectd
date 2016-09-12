@@ -167,61 +167,6 @@ LoadPlugin java
            Attribute "MeanRate"
       </Value>
     </MBean>
-<<<<<<< HEAD:config/10jmx.conf
-   
-
-      <Connection>
-        ServiceURL "service:jmx:rmi:///jndi/rmi://proxy.georchestra:1099/jmxrmi"
-        Host "proxy"
-        Collect "garbage_collector"
-        Collect "memory"
-        Collect "jetty"
-      </Connection>
-      <Connection>
-        ServiceURL "service:jmx:rmi:///jndi/rmi://cas.georchestra:1099/jmxrmi"
-        Host "cas"
-        Collect "garbage_collector"
-        Collect "memory"
-        Collect "jetty"
-      </Connection>
-      <Connection>
-        ServiceURL "service:jmx:rmi:///jndi/rmi://mapfishapp.georchestra:1099/jmxrmi"
-        Host "mapfishapp"
-        Collect "garbage_collector"
-        Collect "memory"
-        Collect "jetty"
-      </Connection>
-      <Connection>
-        ServiceURL "service:jmx:rmi:///jndi/rmi://extractorapp.georchestra:1099/jmxrmi"
-        Host "extractorapp"
-        Collect "garbage_collector"
-        Collect "memory"
-        Collect "jetty"
-      </Connection>
-      <Connection>
-        ServiceURL "service:jmx:rmi:///jndi/rmi://geonetwork.georchestra:1099/jmxrmi"
-        Host "geonetwork"
-        Collect "garbage_collector"
-        Collect "memory"
-        Collect "jetty"
-      </Connection>
-      <Connection>
-        ServiceURL "service:jmx:rmi:///jndi/rmi://geoserver.georchestra:1099/jmxrmi"
-        Host "geoserver"
-        Collect "garbage_collector"
-        Collect "memory"
-        Collect "jetty"
-      </Connection>
-      <Connection>
-        ServiceURL "service:jmx:rmi:///jndi/rmi://geonetwork3.georchestra:1099/jmxrmi"
-        Host "geonetwork3"
-        Collect "garbage_collector"
-        Collect "memory"
-        Collect "jetty"
-        Collect "geonetwork_service_manager"
-        Collect "geonetwork_harvester"
-        Collect "geonetwork_logging"
-      </Connection>
 
 {{ $containers := getvs "/containers/containers/*/name" -}}
 {{ range $containers -}}

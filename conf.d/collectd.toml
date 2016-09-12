@@ -2,7 +2,7 @@
 src = "10jmx.conf.tmpl"
 dest = "/etc/collectd/collectd.conf.d/10jmx.conf"
 keys = [
-  "/self",
+  "/containers",
 ]
 
 reload_cmd = "/usr/bin/sv force-reload collectd"
