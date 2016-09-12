@@ -167,6 +167,7 @@ LoadPlugin java
            Attribute "MeanRate"
       </Value>
     </MBean>
+<<<<<<< HEAD:config/10jmx.conf
    
 
       <Connection>
@@ -221,6 +222,35 @@ LoadPlugin java
         Collect "geonetwork_harvester"
         Collect "geonetwork_logging"
       </Connection>
+
+{{ $containers := getvs "/containers/containers/*/name" -}}
+{{ range $containers -}}
+{{   $contname := . -}}
+{{   $jmxPath := printf "/containers/containers/%s/labels/com.camptocamp.georchestra_jmx" $contname -}}
+{{   $isJmx := getv $jmxPath "false" -}}
+{{   if eq $isJmx "true" -}}
+     <Connection>
+             ServiceURL "service:jmx:rmi:///jndi/rmi://{{ $contname  }}:1099/jmxrmi"
+             Host "{{ $contname }}"
+             Collect "garbage_collector"
+             Collect "memory"
+             Collect "jetty"
+     </Connection>
+{{   end -}}
+{{ end }}
+
+
+# TODO: how to handle specific GN jmx config ?
+#      <Connection>
+#        ServiceURL "service:jmx:rmi:///jndi/rmi://geonetwork3:1099/jmxrmi"
+#        Host "geonetwork3"
+#        Collect "garbage_collector"
+#        Collect "memory"
+#        Collect "jetty"
+#        Collect "geonetwork_service_manager"
+#        Collect "geonetwork_harvester"
+#        Collect "geonetwork_logging"
+#      </Connection>
 
    </Plugin>
 </Plugin>
