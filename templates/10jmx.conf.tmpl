@@ -185,12 +185,12 @@ LoadPlugin java
              Collect "memory"
 {{      if eq $isJetty "true" }}
              Collect "jetty"
-{{      end - }}
+{{      end -}}
 {{      if eq $isGeonetwork "true" }}
              Collect "geonetwork_service_manager"
              Collect "geonetwork_harvester"
              Collect "geonetwork_logging"
-{{      end - }}
+{{      end -}}
      </Connection>
 {{   end -}}
 {{ end }}
