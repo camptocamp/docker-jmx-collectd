@@ -171,31 +171,29 @@ LoadPlugin java
 {{ $containers := getvs "/containers/*/name" -}}
 {{ range $containers -}}
 {{   $contname := . -}}
-{{   $jmxPath := printf "/containers/%s/labels/com.camptocamp.georchestra_jmx" $contname -}}
-{{   $isJmx := getv $jmxPath "false" -}}
+{{   $jmxPath        := printf "/containers/%s/labels/com.camptocamp.jmx" $contname -}}
+{{   $jettyPath      := printf "/containers/%s/labels/com.camptocamp.jmx.jetty" $contname -}}
+{{   $geonetworkPath := printf "/containers/%s/labels/com.camptocamp.jmx.geonetwork" $contname -}}
+{{   $isJmx          := getv $jmxPath "false" -}}
+{{   $isJetty        := getv $jettyPath "false" -}}
+{{   $isGeonetwork   := getv $geonetworkPath "false" -}}
 {{   if eq $isJmx "true" }}
      <Connection>
              ServiceURL "service:jmx:rmi:///jndi/rmi://{{ $contname  }}:1099/jmxrmi"
              Host "{{ $contname }}"
              Collect "garbage_collector"
              Collect "memory"
+{{      if eq $isJetty "true" }}
              Collect "jetty"
+{{      end - }}
+{{      if eq $isGeonetwork "true" }}
+             Collect "geonetwork_service_manager"
+             Collect "geonetwork_harvester"
+             Collect "geonetwork_logging"
+{{      end - }}
      </Connection>
 {{   end -}}
 {{ end }}
-
-
-# TODO: how to handle specific GN jmx config ?
-#      <Connection>
-#        ServiceURL "service:jmx:rmi:///jndi/rmi://geonetwork3:1099/jmxrmi"
-#        Host "geonetwork3"
-#        Collect "garbage_collector"
-#        Collect "memory"
-#        Collect "jetty"
-#        Collect "geonetwork_service_manager"
-#        Collect "geonetwork_harvester"
-#        Collect "geonetwork_logging"
-#      </Connection>
 
    </Plugin>
 </Plugin>
