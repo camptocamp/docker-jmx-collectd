@@ -171,9 +171,9 @@ LoadPlugin java
 {{ $containers := getvs "/containers/*/name" -}}
 {{ range $containers -}}
 {{   $contname := . -}}
-{{   $jmxPath        := printf "/containers/%s/labels/com.camptocamp.jmx" $contname -}}
-{{   $jettyPath      := printf "/containers/%s/labels/com.camptocamp.jmx.jetty" $contname -}}
-{{   $geonetworkPath := printf "/containers/%s/labels/com.camptocamp.jmx.geonetwork" $contname -}}
+{{   $jmxPath        := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx" $contname -}}
+{{   $jettyPath      := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.jetty" $contname -}}
+{{   $geonetworkPath := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.geonetwork" $contname -}}
 {{   $isJmx          := getv $jmxPath "false" -}}
 {{   $isJetty        := getv $jettyPath "false" -}}
 {{   $isGeonetwork   := getv $geonetworkPath "false" -}}
