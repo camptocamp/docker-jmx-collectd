@@ -1,4 +1,4 @@
-FROM camptocamp/collectd:0.1.1
+FROM camptocamp/collectd
 
 RUN apt-get update \
  && apt-get -y upgrade \
@@ -15,5 +15,7 @@ ADD ./conf.d /etc/confd/conf.d
 ADD ./templates /etc/confd/templates
 ADD ./confd.run /etc/service/confd/run
 ADD ./collectd.run /etc/service/collectd/run
+
+RUN ln -sf /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so /usr/lib
 
 COPY /config/*.conf /etc/collectd/collectd.conf.d/
