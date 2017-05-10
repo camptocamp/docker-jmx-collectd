@@ -125,6 +125,24 @@ LoadPlugin java
      </Value>
    </MBean>
 
+   <MBean "jetty_sessions">
+     ObjectName "org.eclipse.jetty.server.session:context=*,type=hashsessionmanager,id=0"
+     InstancePrefix "jetty_sessions_"
+     InstanceFrom "context"
+     <Value>
+       Type "count"
+       Table false
+       Attribute "sessions"
+       InstancePrefix "sessions"
+     </Value>
+     <Value>
+       Type "count"
+       Table false
+       Attribute "sessionsTotal"
+       InstancePrefix "sessionsTotal"
+     </Value>
+   </MBean>
+
     <MBean "geonetwork_service_manager">
       ObjectName "geonetwork3.jeeves.server.dispatchers:name=*,type=ServiceManager"
       InstancePrefix "gn-sm-"
@@ -185,6 +203,7 @@ LoadPlugin java
              Collect "memory"
 {{      if eq $isJetty "true" }}
              Collect "jetty"
+             Collect "jetty_sessions"
 {{      end -}}
 {{      if eq $isGeonetwork "true" }}
              Collect "geonetwork_service_manager"
