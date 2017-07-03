@@ -14,7 +14,7 @@ datas from JMX endpoints.
 # build
 
 ```bash
-$ docker build -t camptocamp/jmx-collectd:vx.y
+$ docker build -t camptocamp/jmx-collectd:vx.y .
 ```
 
 # Usage
@@ -28,4 +28,11 @@ from the rancher-catalog-georchestra entry for the usage.
 ## v2.5
 
 Added `jetty_sessions` metrics.
+
+## v2.6 (2017-07-03)
+
+Somehow collectd seems to segfault in some environments (ppige, geopicardie).
+This version removes useless configuration files, as advised by @mfournier. The
+root docker image has also been fixed to camptocamp/collectd:v0.2.3.
+
 

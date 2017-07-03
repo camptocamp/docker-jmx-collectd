@@ -1,4 +1,4 @@
-FROM camptocamp/collectd
+FROM camptocamp/collectd:v0.2.3
 
 RUN apt-get update \
  && apt-get -y upgrade \
@@ -18,4 +18,3 @@ ADD ./collectd.run /etc/service/collectd/run
 
 RUN ln -sf /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so /usr/lib
 
-COPY /config/*.conf /etc/collectd/collectd.conf.d/
