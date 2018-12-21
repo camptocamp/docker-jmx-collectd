@@ -223,6 +223,7 @@ LoadPlugin java
 {{      if eq $isJetty "true" }}
              Collect "jetty"
              Collect "jetty_sessions"
+             Collect "jetty_defaultsessioncache"
 {{      end -}}
 {{      if eq $isGeonetwork "true" }}
              Collect "geonetwork_service_manager"
