@@ -143,6 +143,25 @@ LoadPlugin java
      </Value>
    </MBean>
 
+   <MBean "jetty_defaultsessioncache">
+     ObjectName "org.eclipse.jetty.server.session:context=*,type=defaultsessioncache,id=0"
+     InstancePrefix "jetty_defaultsessioncache_"
+     InstanceFrom "context"
+     <Value>
+       Type "count"
+       Table false
+       Attribute "sessionsCurrent"
+       InstancePrefix "sessionsCurrent"
+     </Value>
+     <Value>
+       Type "count"
+       Table false
+       Attribute "sessionsTotal"
+       InstancePrefix "sessionsTotal"
+     </Value>
+   </MBean>
+
+
     <MBean "geonetwork_service_manager">
       ObjectName "geonetwork3.jeeves.server.dispatchers:name=*,type=ServiceManager"
       InstancePrefix "gn-sm-"
