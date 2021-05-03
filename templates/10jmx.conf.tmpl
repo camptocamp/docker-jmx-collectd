@@ -205,15 +205,32 @@ LoadPlugin java
       </Value>
     </MBean>
 
+    <MBean "geoserver_controlflow">
+      ObjectName "metrics:name=org.geoserver.flow.ControlFlowCallback.*,type=gauges"
+      InstancePrefix "geoserver-controlflow-"
+      InstanceFrom "name"
+      <Value>
+           Type "count"
+           Table false
+           Attribute "Value"
+           InstancePrefix "geoserver-controlflow"
+         </Value>
+    </MBean>
+
+
+
+
 {{ $containers := getvs "/containers/*/name" -}}
 {{ range $containers -}}
 {{   $contname := . -}}
 {{   $jmxPath        := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx" $contname -}}
 {{   $jettyPath      := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.jetty" $contname -}}
 {{   $geonetworkPath := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.geonetwork" $contname -}}
+{{   $gsCtrlFlowPath := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.geoserver.control-flow" $contname -}}
 {{   $isJmx          := getv $jmxPath "false" -}}
 {{   $isJetty        := getv $jettyPath "false" -}}
 {{   $isGeonetwork   := getv $geonetworkPath "false" -}}
+{{   $isGsCtrlFlow   := getv $gsCtrlFlowPath "false" -}}
 {{   if eq $isJmx "true" }}
      <Connection>
              ServiceURL "service:jmx:rmi:///jndi/rmi://{{ $contname  }}:1099/jmxrmi"
@@ -225,6 +242,11 @@ LoadPlugin java
              Collect "jetty_sessions"
              Collect "jetty_defaultsessioncache"
 {{      end -}}
+
+{{      if eq $isGsCtrlFlow "true" }}
+             Collect "geoserver_controlflow"
+{{      end -}}
+
 {{      if eq $isGeonetwork "true" }}
              Collect "geonetwork_service_manager"
              Collect "geonetwork_harvester"

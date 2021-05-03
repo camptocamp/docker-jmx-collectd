@@ -53,3 +53,9 @@ org.eclipse.jetty.server.session:context=cas,id=0,type=defaultsessioncache
   %7   - state (java.lang.String, r)
   %8   - stopTimeout (long, rw)
 ```
+
+# v2.8 (2021-05-03)
+
+Adding 2 metrics for geoserver when controlflow is instrumented with DropWizard's metrics library.
+See: https://github.com/pmauduit/geoserver/tree/controlflow-jmx
+
