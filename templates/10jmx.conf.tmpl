@@ -125,23 +125,6 @@ LoadPlugin java
      </Value>
    </MBean>
 
-   <MBean "jetty_sessions">
-     ObjectName "org.eclipse.jetty.server.session:context=*,type=hashsessionmanager,id=0"
-     InstancePrefix "jetty_sessions_"
-     InstanceFrom "context"
-     <Value>
-       Type "count"
-       Table false
-       Attribute "sessions"
-       InstancePrefix "sessions"
-     </Value>
-     <Value>
-       Type "count"
-       Table false
-       Attribute "sessionsTotal"
-       InstancePrefix "sessionsTotal"
-     </Value>
-   </MBean>
 
    <MBean "jetty_defaultsessioncache">
      ObjectName "org.eclipse.jetty.server.session:context=*,type=defaultsessioncache,id=0"
@@ -239,7 +222,6 @@ LoadPlugin java
              Collect "memory"
 {{      if eq $isJetty "true" }}
              Collect "jetty"
-             Collect "jetty_sessions"
              Collect "jetty_defaultsessioncache"
 {{      end -}}
 

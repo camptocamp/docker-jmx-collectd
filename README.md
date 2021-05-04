@@ -59,3 +59,7 @@ org.eclipse.jetty.server.session:context=cas,id=0,type=defaultsessioncache
 Adding 2 metrics for geoserver when controlflow is instrumented with DropWizard's metrics library.
 See: https://github.com/pmauduit/geoserver/tree/controlflow-jmx
 
+# v2.9 (2021-05-04)
+
+Cleaning up jetty sessions metrics gathering.
+
