@@ -1,4 +1,4 @@
-FROM camptocamp/collectd:v0.2.3
+FROM debian:bullseye
 
 RUN apt-get update \
  && apt-get -y upgrade \
@@ -7,14 +7,13 @@ RUN apt-get update \
     libgcrypt20 \
     libriemann-client0 \
     libudev1 \
-    openjdk-8-jre-headless \
+    default-jre \
+    collectd \
+    libmicrohttpd12 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-ADD ./conf.d /etc/confd/conf.d
-ADD ./templates /etc/confd/templates
-ADD ./confd.run /etc/service/confd/run
-ADD ./collectd.run /etc/service/collectd/run
+COPY ./collectd.conf /etc/collectd/collectd.conf
 
-RUN ln -sf /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so /usr/lib
-
+ENTRYPOINT ["/bin/sh", "-c"]
+CMD ["collectd -f"]
