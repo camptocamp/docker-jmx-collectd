@@ -200,17 +200,35 @@ LoadPlugin java
          </Value>
     </MBean>
 
-
+    <MBean "hikariCP">
+        ObjectName "com.zaxxer.hikari:type=Pool *"
+        InstancePrefix "hikari_pool_"
+        InstanceFrom "type"
+        <Value>
+          Type "count"
+          Table false
+          Attribute "ActiveConnections"
+          InstancePrefix "ActiveConnections"
+        </Value>
+        <Value>
+          Type "count"
+          Table false
+          Attribute "ThreadsAwaitingConnection"
+          InstancePrefix "ThreadsAwaitingConnection"
+        </Value>
+    </MBean>
 
 
 {{ $containers := getvs "/containers/*/name" -}}
 {{ range $containers -}}
 {{   $contname := . -}}
 {{   $jmxPath        := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx" $contname -}}
+{{   $hikariPath     := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.hikari" $contname -}}
 {{   $jettyPath      := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.jetty" $contname -}}
 {{   $geonetworkPath := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.geonetwork" $contname -}}
 {{   $gsCtrlFlowPath := printf "/containers/%s/labels/com.camptocamp.monitoring.jmx.geoserver.control-flow" $contname -}}
 {{   $isJmx          := getv $jmxPath "false" -}}
+{{   $isHikari       := getv $hikariPath "false" -}}
 {{   $isJetty        := getv $jettyPath "false" -}}
 {{   $isGeonetwork   := getv $geonetworkPath "false" -}}
 {{   $isGsCtrlFlow   := getv $gsCtrlFlowPath "false" -}}
@@ -223,6 +241,10 @@ LoadPlugin java
 {{      if eq $isJetty "true" }}
              Collect "jetty"
              Collect "jetty_defaultsessioncache"
+{{      end -}}
+
+{{      if eq $isHikari "true" }}
+             Collect "hikariCP"
 {{      end -}}
 
 {{      if eq $isGsCtrlFlow "true" }}
