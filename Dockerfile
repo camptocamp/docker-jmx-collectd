@@ -1,8 +1,8 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
-RUN apt-get update \
- && apt-get -y upgrade \
- && apt-get -y --no-install-suggests --no-install-recommends install \
+RUN apt update \
+ && apt -y upgrade \
+ && apt -y --no-install-suggests --no-install-recommends install \
     libcurl3-gnutls \
     libgcrypt20 \
     libriemann-client0 \
@@ -10,7 +10,7 @@ RUN apt-get update \
     default-jre \
     collectd \
     libmicrohttpd12 \
- && apt-get clean \
+ && apt clean \
  && rm -rf /var/lib/apt/lists/*
 
 COPY ./collectd.conf /etc/collectd/collectd.conf
