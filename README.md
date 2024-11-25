@@ -63,3 +63,6 @@ See: https://github.com/pmauduit/geoserver/tree/controlflow-jmx
 
 Cleaning up jetty sessions metrics gathering.
 
+# v3.0 (2024-11-25)
+
+Switch to debian:bookworm as base image, run as non-root user.
