@@ -15,5 +15,7 @@ RUN apt update \
 
 COPY ./collectd.conf /etc/collectd/collectd.conf
 
+USER 10000:10001
+
 ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["collectd -f"]
