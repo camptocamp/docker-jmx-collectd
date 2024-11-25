@@ -15,6 +15,8 @@ RUN apt update \
 
 COPY ./collectd.conf /etc/collectd/collectd.conf
 
+RUN chown -R 10000:10001 /etc/collectd
+
 USER 10000:10001
 
 ENTRYPOINT ["/bin/sh", "-c"]
